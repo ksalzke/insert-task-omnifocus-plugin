@@ -27,19 +27,21 @@
     let task = selection.tasks[0];
     let parentTask = functionLibrary.getParent(task);
 
-    if (parentTask.sequential) {
-      // contained within sequential action group
-      if (form.values["before"]) {
-        new Task(form.values["name"], task.before);
-      } else {
-        new Task(form.values["name"], task.after);
-      }
+    if (!parentTask.sequential) {
+      // contained within parallel action group - add parent action group and move original task inside group
+      let newParent = new Task("", task.before);
+      newParent.sequential = true;
+      moveTasks([task], newParent.ending);
+    }
+
+    if (form.values["before"]) {
+      new Task(form.values["name"], task.before);
     } else {
-      // contained within parallel action group
+      new Task(form.values["name"], task.after);
     }
   });
 
-  action.validate = function (selection, sender) {
+  action.validate = (selection, sender) => {
     // available if a single task is selected
     return selection.tasks.length === 1;
   };
