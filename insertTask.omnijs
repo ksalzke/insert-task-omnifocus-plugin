@@ -39,6 +39,8 @@
     } else {
       new Task(form.values["name"], task.after);
     }
+
+    cleanUp();
   });
 
   action.validate = (selection, sender) => {
