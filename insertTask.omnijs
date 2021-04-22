@@ -1,52 +1,56 @@
+/* global PlugIn Form Task moveTasks cleanUp */
+/* eslint spaced-comment: ["error", "always", { "exceptions": ["{"] }] */
 /*{
-	"type": "action",
-	"targets": ["omnifocus"],
-	"author": "Kaitlin Salzke",
-    "identifier": "com.KaitlinSalzke.InsertTask",
-	"version": "1.0",
-	"description": "Insert a task before or after the current task",
-	"label": "Insert Task",
-	"shortLabel": "Insert Task"
+"type": "action",
+"targets": ["omnifocus"],
+"author": "Kaitlin Salzke",
+"identifier": "com.KaitlinSalzke.InsertTask",
+"version": "1.0",
+"description": "Insert a task before or after the current task",
+"label": "Insert Task",
+"shortLabel": "Insert Task"
 }*/
 (() => {
-  action = new PlugIn.Action(async (selection, sender) => {
+  const action = new PlugIn.Action(async (selection, sender) => {
     // load function library - used to get parent task
-    let functionLibrary = PlugIn.find(
-      "com.KaitlinSalzke.functionLibrary"
-    ).library("functionLibrary");
+    const functionLibrary = PlugIn.find(
+      'com.KaitlinSalzke.functionLibrary'
+    ).library('functionLibrary')
 
     // FORM - to prompt user for task to insert
-    let form = new Form();
-    form.addField(new Form.Field.String("name", "Name", null));
+    const form = new Form()
+    form.addField(new Form.Field.String('name', 'Name', null))
     form.addField(
-      new Form.Field.Checkbox("before", "Before current task", false)
-    );
-    await form.show("Task to insert: ", "Insert");
+      new Form.Field.Checkbox('before', 'Before current task', false)
+    )
+    await form.show('Task to insert: ', 'Insert')
 
     // INSERT TASK
-    let task = selection.tasks[0];
-    let parentTask = functionLibrary.getParent(task);
+    const task = selection.tasks[0]
+    const parentTask = functionLibrary.getParent(task)
 
     if (!parentTask.sequential) {
       // contained within parallel action group - add parent action group and move original task inside group
-      let newParent = new Task("", task.before);
-      newParent.sequential = true;
-      moveTasks([task], newParent.ending);
+      const newParent = new Task('', task.before)
+      newParent.sequential = true
+      moveTasks([task], newParent.ending)
     }
 
-    if (form.values["before"]) {
-      new Task(form.values["name"], task.before);
+    if (form.values.before) {
+      /* eslint-disable no-new */
+      new Task(form.values.name, task.before)
     } else {
-      new Task(form.values["name"], task.after);
+      /* eslint-disable no-new */
+      new Task(form.values.name, task.after)
     }
 
-    cleanUp();
-  });
+    cleanUp()
+  })
 
   action.validate = (selection, sender) => {
     // available if a single task is selected
-    return selection.tasks.length === 1;
-  };
+    return selection.tasks.length === 1
+  }
 
-  return action;
-})();
+  return action
+})()
