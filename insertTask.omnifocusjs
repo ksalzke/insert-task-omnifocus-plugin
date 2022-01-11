@@ -5,10 +5,11 @@
 "targets": ["omnifocus"],
 "author": "Kaitlin Salzke",
 "identifier": "com.KaitlinSalzke.InsertTask",
-"version": "1.0",
+"version": "1.1.0",
 "description": "Insert a task before or after the current task",
 "label": "Insert Task",
-"shortLabel": "Insert Task"
+"shortLabel": "Insert Task",
+"image": "text.cursor"
 }*/
 (() => {
   const action = new PlugIn.Action(async (selection, sender) => {
