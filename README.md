@@ -8,13 +8,15 @@ _Please note that all scripts on my GitHub account (or shared elsewhere) are wor
 
 Refer to ['issues'](https://github.com/ksalzke/insert-task-omnifocus-plugin/issues) for known issues and planned changes/enhancements.
 
-# Installation & Set-Up
+## Installation
 
-**Important note: for this plug-in bundle to work correctly, my [Function Library for OmniFocus](https://github.com/ksalzke/function-library-for-omnifocus) is also required and needs to be added to the plug-in folder separately.**
+[![Install in OmniFocus](https://img.shields.io/badge/OmniFocus-Install-5E5CE6?style=flat-square)](https://ksalzke.github.io/omnifocus-plugin-installer/?repo=insert-task-omnifocus-plugin)
 
-1. Download the [latest release](https://github.com/ksalzke/insert-task-omnifocus-plugin/releases/latest).
-2. Unzip the downloaded file.
-3. Move the `.omnifocusjs` file to your OmniFocus plug-in library folder (or open it to install).
+Select **Install** above, then follow the prompts.
+
+## Prerequisites 
+
+This plug-in requires [Function Library for OmniFocus](https://github.com/ksalzke/function-library-for-omnifocus). Install it separately before using this plug-in.
 
 # Actions
 
